@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Address": {
+    "dataSource": "db",
+    "public": false
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Email": {
+    "dataSource": "GEmail"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true
+  },
+  "account": {
+    "dataSource": "db",
+    "public": true
+  },
+  "project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "userAssignment": {
+    "dataSource": "db",
+    "public": false
+  },
+  "userAccount": {
+    "dataSource": "db",
+    "public": false
+  },
+  "affiliateRequest": {
+    "dataSource": "db",
+    "public": true
+  }
+}

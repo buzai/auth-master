@@ -1,0 +1,139 @@
+{
+  "name": "user",
+  "base": "User",
+  "idInjection": true,
+  "options": {},
+  "mixins": {
+    "Cascade": {
+      "projects": {
+        "unlink": true
+      },
+      "accounts": {
+        "unlink": true
+      }
+    }
+  },
+  "properties": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "addressbook": {
+      "type": ["Address"]
+    },
+    "cell":{
+      "type": "string"
+    }
+  },
+  "hide":["ownerId"],
+  "validations": [],
+  "relations": {
+    "owner": {
+      "type": "belongsTo",
+      "model": "account",
+      "foreignKey": "ownerId"
+    },
+    "accounts": {
+      "type": "hasMany",
+      "model": "account",
+      "foreignKey": "userId",
+      "through": "userAccount"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "project",
+      "foreignKey": "userId",
+      "through": "userAssignment"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "signup"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "exists",
+        "__get__owner",
+        
+        "__findById__projects",
+        "__get__projects",
+        "__findById__projects",
+        "__count__projects",
+        "projectPermissions",
+
+        "__get__accounts",
+        "__findById__accounts",
+        "__count__accounts",
+        "getAccounts",
+
+        "projectList",
+        "projectPermissions"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "login"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": [
+        "logout",
+        "getRolesByToken"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "confirm"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "resetPassword"
+    }
+  ],
+  "methods": {}
+}

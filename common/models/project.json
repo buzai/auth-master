@@ -1,0 +1,79 @@
+{
+  "name": "project",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Cascade": {
+      "users": {
+        "unlink": true
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "application": {
+      "type": "string"
+    },
+    "params": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "accounts": {
+      "type": "belongsTo",
+      "model": "account",
+      "foreignKey": "ownerId"
+    },
+    "operators": {
+      "type": "hasMany",
+      "model": "userAssignment",
+      "foreignKey": "projectId",
+      "scope":{
+        "include":"users"
+      }
+    },
+    "permissions": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "projectId",
+      "through": "userAssignment"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "projectOwner",
+      "permission": "ALLOW",
+      "property": [
+        "updateAttributes",
+        "findById",
+        "__get__operators",
+        "__get__permissions",
+        "__link__permissions",
+        "__unlink__permissions",
+        "__get__accounts"
+      ]
+    }
+  ],
+  "methods": {}
+}

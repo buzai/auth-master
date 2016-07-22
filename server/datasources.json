@@ -1,0 +1,31 @@
+{
+  "db-mm": {
+    "name": "db",
+    "connector": "memory"
+  },
+  
+  "GEmail": {
+    "name": "GEmail",
+    "defaultForType": "mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "ypigsfly@gmail.com",
+          "pass": "Dosarrest"
+        }
+      }
+    ]
+  },
+  "db": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "auth",
+    "name": "db",
+    "connector": "mongodb"
+  }
+}

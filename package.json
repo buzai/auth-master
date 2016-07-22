@@ -1,0 +1,40 @@
+{
+  "name": "keystone",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node .",
+    "pretest": "jshint .",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "debug": "^2.2.0",
+    "ip-address": "^5.8.0",
+    "jws": "^3.0.0",
+    "lazy.js": "^0.4.2",
+    "loopback": "^2.22.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^2.1.0",
+    "loopback-connector-mysql": "^2.2.1",
+    "loopback-connector-postgresql": "^2.4.0",
+    "loopback-datasource-juggler": "^2.39.0",
+    "q": "^1.4.1",
+    "serve-favicon": "^2.0.1",
+    "speakeasy": "^2.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "jshint": "^2.5.6",
+    "mocha": "^2.3.4",
+    "should": "^8.1.1",
+    "supertest": "^1.1.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "description": "keystone"
+}

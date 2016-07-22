@@ -1,0 +1,146 @@
+{
+  "name": "account",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Cascade": {
+      "projects": {
+        "unlink": false
+      },
+      "members": {
+        "unlink": true
+      },
+      "users": {
+        "unlink": false
+      },
+      "subs": {
+        "unlink": false
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "created": "date",
+    "type": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "parent": {
+      "type": "belongsTo",
+      "model": "account",
+      "foreignKey": "parentId"
+    },
+    "subs": {
+      "type": "hasMany",
+      "model": "account",
+      "foreignKey": "parentId"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "project",
+      "foreignKey": "ownerId"
+    },
+    "accountOwners": {
+      "type": "hasMany",
+      "model": "userAccount",
+      "foreignKey": "accountId",
+      "scope":{
+        "where": {"ownership":1},
+        "include":"users"
+      }
+    },
+    "accountMembers": {
+      "type": "hasMany",
+      "model": "userAccount",
+      "foreignKey": "accountId",
+      "scope":{
+        "where": {"ownership":2},
+        "include":"users"
+      }
+    },
+    "users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "ownerId"
+    },
+    "roles": {
+      "type": "hasMany",
+      "model": "role",
+      "foreignKey": "ownerId"
+    },
+    "members": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "accountId",
+      "through": "userAccount"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "accountOwner",
+      "permission": "ALLOW",
+      "property": [
+        "updateAttributes",
+        "findById",
+        
+        "__findById__accountMembers",
+        "__get__accountMembers",
+
+        "__findById__accountOwners",
+        "__get__accountOwners",
+
+        "__findById__members",
+        "__get__members",
+        "__link__members",
+        "__unlink__members",
+        
+        "__delete__users",
+        "__get__users",
+        "__create__users",
+        "__findById__users",
+        "__destroyById__users",
+        "__updateById__users",
+        
+        "__delete__projects",
+        "__get__projects",
+        "__create__projects",
+        "__findById__projects",
+        "__destroyById__projects",
+        "__updateById__projects",
+
+        "__delete__subs",
+        "__get__subs",
+        "__create__subs",
+        "__findById__subs",
+        "__destroyById__subs",
+        "__updateById__subs",
+
+        "createOwner",
+        "createMember"
+      ]
+    }
+  ],
+  "methods": {}
+}

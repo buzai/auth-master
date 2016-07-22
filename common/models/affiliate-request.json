@@ -1,0 +1,30 @@
+{
+  "name": "affiliateRequest",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "subId": {
+      "type": "any"
+    },
+    "mainId": {
+      "type": "any"
+    },
+    "subApproval": {
+      "type": "boolean",
+      "default": false
+    },
+    "mainApproval": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+  },
+  "acls": [
+  ],
+  "methods": {}
+}
